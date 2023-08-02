@@ -1,10 +1,12 @@
+"""_summary_
+"""
 
-import datetime
 from datetime import datetime as dt
-from dateutil.relativedelta import *
+
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
+from dateutil import relativedelta
 
 currency = input('Choose a currency:')
 depth = int(input('What is your current depth?'))
@@ -20,16 +22,31 @@ negative = depth + net_spendings
 monthly_net_savings = int(monthly_income_post_tax - negative)
 
 
-def generate_data(num_months=12, base=dt.today()):
+def generate_data(num_months=12, base=dt.today()) -> tuple:
+    """_summary_
+
+    :param num_months: _description_, defaults to 12
+    :type num_months: int, optional
+    :param base: _description_, defaults to dt.today()
+    :type base: _type_, optional
+    :return: _description_
+    :rtype: tuple
+    """
+
     x = [base + relativedelta(months=+i) for i in range(num_months)]
     y = saved + monthly_net_savings * np.arange(1, num_months + 1)
     return x, y
 
 
-x, net_savings = generate_data()
+def plot_trendline(x, net_savings) -> None:
+    """_summary_
 
+    :param x: _description_
+    :type x: _type_
+    :param net_savings: _description_
+    :type net_savings: _type_
+    """
 
-def plot_trendline():
     plt.figure(figsize=(8, 6))
 
     # Set the locator
@@ -49,7 +66,15 @@ def plot_trendline():
     plt.show()
 
 
-def show_data():
+def show_data(x, net_savings) -> None:
+    """_summary_
+
+    :param x: _description_
+    :type x: _type_
+    :param net_savings: _description_
+    :type net_savings: _type_
+    """
+
     print(f'\n{currency = :>21}')
     print(f'{year = :>25}')
     print(f'{depth = :>24}')
@@ -62,9 +87,11 @@ def show_data():
         print(f'{i.date()}: {int(j)}')
 
 
-def main():
-    show_data()
-    plot_trendline()
+def main() -> None:
+    x, net_savings = generate_data()
+
+    show_data(x, net_savings)
+    plot_trendline(x, net_savings)
 
 
 if __name__ == '__main__':
