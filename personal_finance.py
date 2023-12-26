@@ -9,7 +9,7 @@ import numpy as np
 from dateutil import relativedelta
 
 currency = input('Choose a currency:')
-depth = int(input('What is your current depth?'))
+debt = int(input('What is your current debt?'))
 saved = int(input('What is your current net savings?'))
 monthly_income_pre_tax = int(input('What is your monthly salary?'))
 tax_percentage = int(input('What is your tax percentage?'))
@@ -18,7 +18,7 @@ net_spendings = int(input('What is your net monthly spendings?'))
 year = 2020
 
 monthly_income_post_tax = monthly_income_pre_tax * tax_percentage / 100
-negative = depth + net_spendings
+negative = debt + net_spendings
 monthly_net_savings = int(monthly_income_post_tax - negative)
 
 
@@ -77,7 +77,7 @@ def show_data(x, net_savings) -> None:
 
     print(f'\n{currency = :>21}')
     print(f'{year = :>25}')
-    print(f'{depth = :>24}')
+    print(f'{debt = :>24}')
     print(f'{saved = :>24}')
     print(f'{monthly_income_pre_tax = :>7}')
     print(f'{tax_percentage = :>15}')
